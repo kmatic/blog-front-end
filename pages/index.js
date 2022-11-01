@@ -2,7 +2,7 @@ import Head from 'next/head';
 import Layout, { siteTitle } from '../components/layout';
 import utilStyles from '../styles/utils.module.css';
 import Link from 'next/link';
-import Date from '../components/date';
+import DateComponent from '../components/date';
 
 export default function Home({ posts }) {
   return (
@@ -22,7 +22,7 @@ export default function Home({ posts }) {
               <Link href={`/posts/${_id}`}>{title}</Link>
               <br />
               <small className={utilStyles.lightText}>
-                <Date dateString={timestamp} />
+                <DateComponent dateString={timestamp} />
               </small>
             </li>
           ))}
