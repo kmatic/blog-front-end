@@ -11,8 +11,8 @@ export default function Home({ posts }) {
         <title>{siteTitle}</title>
       </Head>
       <section className={utilStyles.headingMd}>
-        <p>Hello, I'm <b>Kris</b>. I'm a Mechanical Engineer turned Software Developer. This page will be a front-end for my blog Rest API.</p>
-        <p>This page was bootstrapped from Next.js and I used its learning resources to create this front-end page.</p>
+        <p>Hello, I'm <b>Kris</b>. I'm a Mechanical Engineer turned Software Developer. This page will be a front-end for my blog Rest API. You can view posts and submit comments to the back-end on each specific blog page.</p>
+        <p>This page was bootstrapped from Next.js as I was going through their interactive course to get started with the framework. You can do the same <a href='https://nextjs.org/learn/basics/create-nextjs-app'>here.</a></p>
       </section>
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
         <h2 className={utilStyles.headingLg}>Blog</h2>

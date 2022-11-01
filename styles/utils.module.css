@@ -50,3 +50,23 @@
   .lightText {
     color: #666;
   }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .formDiv {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .button {
+    padding: 5px;
+    font-weight: bold;
+  }
+
+  .input {
+    padding: 5px;
+  }

@@ -33,7 +33,7 @@ export default function Post({ post, comments }) {
         console.log(err);
       }
     };
-    
+
     return (
       <Layout>
         <Head>
@@ -48,7 +48,7 @@ export default function Post({ post, comments }) {
         </article>
         <ul className={utilStyles.list}>
           <h2 className={utilStyles.headingLg}>Comments</h2>
-          {commentState.map((comment) => (
+          {commentState.length > 0 ? (commentState.map((comment) => (
             <li key={comment._id}>
               <h3 style={{marginBottom:0}}>{comment.text}</h3>
               <small>Posted by: {comment.name}</small>
@@ -57,15 +57,23 @@ export default function Post({ post, comments }) {
                 <DateComponent dateString={comment.timestamp} />
               </small>
             </li>
-          ))}
+          ))) : (
+            <li>
+                <p>There are no comments yet! Be the first!</p>
+            </li>
+          )}
         </ul>
-        <form onSubmit={handleSubmit}>
-          <h2>Post a Comment</h2>
-          <label htmlFor='name'>Name: </label>
-          <input type='text' name='name' value={name} onChange={(e) => setName(e.target.value)}></input>
-          <label htmlFor='text'>Message: </label>
-          <input type='text' name='text' value={text} onChange={(e) => setText(e.target.value)}></input>
-          <button>Post</button>
+        <form onSubmit={handleSubmit} className={utilStyles.form}>
+          <h2 style={{marginBottom:0}}>Post a Comment</h2>
+          <div className={utilStyles.formDiv}>
+              <label htmlFor='name'>Name: </label>
+              <input type='text' name='name' value={name} onChange={(e) => setName(e.target.value)} className={utilStyles.input}></input>
+          </div>
+          <div className={utilStyles.formDiv}>
+              <label htmlFor='text'>Message: </label>
+              <input type='text' name='text' value={text} onChange={(e) => setText(e.target.value)} className={utilStyles.input}></input>
+          </div>
+          <button className={utilStyles.button}>Post</button>
         </form>
       </Layout>
     );
