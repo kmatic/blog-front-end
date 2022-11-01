@@ -3,7 +3,8 @@ import Head from 'next/head';
 import Date from '../../components/date';
 import utilStyles from '../../styles/utils.module.css';
 
-export default function Post({ post }) {
+export default function Post({ post, comments }) {
+    console.log(comments);
     return (
       <Layout>
         <Head>
@@ -16,6 +17,17 @@ export default function Post({ post }) {
           </div>
           <div dangerouslySetInnerHTML={{ __html: post.text }} />
         </article>
+        <ul className={utilStyles.list}>
+          <h2 className={utilStyles.headingLg}>Comments</h2>
+          {comments.map((comment) => (
+            <li key={comment._id}>
+              <h3 style={{marginBottom:0}}>TEST TEST TEST</h3>
+              <small className={utilStyles.lightText}>
+                <Date dateString={comment.timestamp} />
+              </small>
+            </li>
+          ))}
+        </ul>
       </Layout>
     );
 }
@@ -38,11 +50,17 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-    const res = await fetch(`https://ghostly-zombie-21867.herokuapp.com/api/posts/${params.id}`);
-    const data = await res.json();
-    const post = data.post;
+    // get posts
+    const postRes = await fetch(`https://ghostly-zombie-21867.herokuapp.com/api/posts/${params.id}`);
+    const postData = await postRes.json();
+    const post = postData.post;
+
+    // get comments
+    const commentRes = await fetch(`https://ghostly-zombie-21867.herokuapp.com/api/posts/${params.id}/comments`);
+    const commentData = await commentRes.json();
+    const comments = commentData.comments;
 
     return {
-      props: { post }
+      props: { post, comments }
     };
 }
