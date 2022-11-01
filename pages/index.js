@@ -4,20 +4,7 @@ import utilStyles from '../styles/utils.module.css';
 import Link from 'next/link';
 import Date from '../components/date';
 
-import { getSortedPostsData } from '../lib/posts';
-
-export async function getStaticProps() {
-  const data = await getSortedPostsData();
-  const allPostsData = data.posts;
-  console.log(allPostsData);
-  return {
-    props: {
-      allPostsData,
-    },
-  };
-}
-
-export default function Home({ allPostsData }) {
+export default function Home({ posts }) {
   return (
     <Layout home>
       <Head>
@@ -30,7 +17,7 @@ export default function Home({ allPostsData }) {
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
         <h2 className={utilStyles.headingLg}>Blog</h2>
         <ul className={utilStyles.list}>
-          {allPostsData.map(({ _id, timestamp, title }) => (
+          {posts.map(({ _id, timestamp, title }) => (
             <li className={utilStyles.listItem} key={_id}>
               <Link href={`/posts/${_id}`}>{title}</Link>
               <br />
@@ -43,4 +30,14 @@ export default function Home({ allPostsData }) {
       </section>
     </Layout>
   );
+}
+
+export async function getStaticProps() {
+  const res = await fetch('https://ghostly-zombie-21867.herokuapp.com/api/posts');
+  const data = await res.json();
+  const posts = data.posts;
+
+  return {
+    props: { posts }
+  };
 }
