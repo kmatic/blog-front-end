@@ -108,6 +108,7 @@ export async function getStaticProps({ params }) {
     const comments = commentData.comments;
 
     return {
-      props: { post, comments }
+      props: { post, comments },
+      revalidate: 1,
     };
 }
